@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Premium Google SEO Meta Tags -->
+    <title>FinPulse AI | Live Crypto Rates & Global Currency Exchange</title>
+    <meta name="description" content="Track live cryptocurrency prices and global fiat currency exchange rates in real-time. Get fast, accurate financial data with FinPulse AI.">
+    <meta name="keywords" content="Live Crypto Rates, Live Currency Exchange, Bitcoin Price, Crypto Tracker, Finance Portal, FinPulse AI">
+    <meta name="author" content="Siva Satya Prasad">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Meta Tags for Viral Social Sharing -->
+    <meta property="og:title" content="FinPulse AI | Live Crypto Rates & Currency Exchange">
+    <meta property="og:description" content="Real-time global cryptocurrency prices and exchange rates. Fast and accurate.">
+    <meta property="og:type" content="website">
+
+    <!-- Dynamic Google Search Console Verification Slot -->
+    <meta id="google-verify-meta" name="google-site-verification" content="">
+
+    <!-- Advanced Schema Markup for Google Ranking -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "FinPulse AI",
+      "url": "https://finpulse-ai.vercel.app",
+      "description": "Real-time cryptocurrency tracker and fiat currency exchange rate platform.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All"
+    }
+    </script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.05), transparent 40%),
+                        radial-gradient(circle at top left, rgba(6, 182, 212, 0.05), transparent 40%),
+                        #020617;
+        }
+        .premium-glass {
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        }
+        .premium-glass:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 4px 30px rgba(6, 182, 212, 0.1);
+            transition: all 0.4s ease;
+        }
+        .ad-glow {
+            background: rgba(30, 41, 59, 0.25);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col justify-between">
+
+    <!-- Premium Header -->
+    <header class="premium-glass sticky top-0 z-50 px-8 py-4 flex justify-between items-center border-b border-slate-900">
+        <div class="flex items-center gap-3">
+            <div class="h-9 w-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center font-bold text-slate-950 text-xl shadow-lg shadow-cyan-500/20">F</div>
+            <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">FinPulse<span class="text-cyan-400 font-medium text-lg ml-1">AI</span></span>
+        </div>
+        <button onclick="refreshData()" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold px-5 py-2.5 rounded-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] text-sm flex items-center gap-2 cursor-pointer shadow-lg shadow-cyan-500/10">
+            🔄 Refresh Rates
+        </button>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl w-full mx-auto px-4 py-10 flex-grow">
+        
+        <!-- HEADER AD SLOT -->
+        <div id="header_ad" class="w-full min-h-[90px] ad-glow rounded-2xl mb-10 flex items-center justify-center text-xs text-slate-500 tracking-wider uppercase font-medium">
+            Waiting for Advertisement Slot...
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left & Middle: Real-Time Cards -->
+            <div class="lg:col-span-2 space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- Crypto Card -->
+                    <section class="premium-glass p-6 rounded-3xl transition-all duration-300">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-xl font-bold flex items-center gap-2.5 text-cyan-400">🪙 Crypto Rates <span class="text-xs bg-cyan-500/10 text-cyan-400 font-semibold px-2 py-0.5 rounded-md uppercase">USD</span></h2>
+                            <span class="h-2 w-2 rounded-full bg-cyan-400 animate-ping"></span>
+                        </div>
+                        <div id="crypto-loading" class="text-slate-400 text-sm animate-pulse flex items-center gap-2">Connecting to live market feeds...</div>
+                        <div id="crypto-container" class="space-y-4 hidden"></div>
+                    </section>
+                    
+                    <!-- Currency Card -->
+                    <section class="premium-glass p-6 rounded-3xl transition-all duration-300">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-xl font-bold flex items-center gap-2.5 text-emerald-400">💵 Forex Exchange <span class="text-xs bg-emerald-500/10 text-emerald-400 font-semibold px-2 py-0.5 rounded-md uppercase">INR</span></h2>
+                            <span class="h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        </div>
+                        <div id="currency-loading" class="text-slate-400 text-sm animate-pulse flex items-center gap-2">Connecting to global banking feeds...</div>
+                        <div id="currency-container" class="space-y-4 hidden"></div>
+                    </section>
+
+                </div>
+
+                <!-- NATIVE CONTENT AD SLOT -->
+                <div id="native_content" class="w-full min-h-[160px] ad-glow rounded-2xl flex items-center justify-center text-xs text-slate-500 tracking-wider uppercase font-medium">
+                    Sponsored Content Stream...
+                </div>
+            </div>
+
+            <!-- Right Sidebar: Vertical Ad -->
+            <div class="space-y-8">
+                <!-- VERTICAL AD SLOT -->
+                <div id="sidebar_vertical" class="w-full min-h-[600px] ad-glow rounded-3xl flex items-center justify-center text-xs text-slate-500 tracking-wider uppercase font-medium">
+                    Premium Sidebar Showcase...
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950/40 backdrop-blur-md px-8 py-6 text-center text-sm text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p>© 2026 FinPulse AI. All Rights Reserved.</p>
+        <p class="text-xs text-slate-600 bg-slate-900/50 px-3 py-1 rounded-lg border border-slate-800">Engineered by Siva Satya Prasad</p>
+    </footer>
+
+    <!-- Core Dynamic Engines -->
+    <script>
+        // Your Google Sheet Web App URL injected perfectly
+        const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzP08WVqn9wUNN-vNpqrHTwuvzKu5cBQwmpsGY5K71oca6-nD6F4c97kgyaZMfvLqsK/exec";
+
+        async function loadGoogleSheetConfig() {
+            if(SHEET_API_URL.includes("YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE") || !SHEET_API_URL) return;
+            
+            try {
+                const response = await fetch(SHEET_API_URL);
+                const configData = await response.json();
+
+                configData.forEach(item => {
+                    // 1. Render Ads dynamically into slots
+                    const slot = document.getElementById(item.placement);
+                    if (slot && item.code.trim() !== "") {
+                        slot.innerHTML = item.code;
+                        slot.classList.remove('ad-glow', 'text-slate-500', 'text-xs', 'font-medium', 'tracking-wider');
+                    }
+
+                    // 2. Dynamic Google Search Console Verification Injection
+                    if (item.placement === "google_verification" && item.code.trim() !== "") {
+                        document.getElementById('google-verify-meta').setAttribute('content', item.code.trim());
+                    }
+
+                    // 3. Dynamic Google Analytics Injection
+                    if (item.placement === "google_analytics" && item.code.trim() !== "" && !window.ga_loaded) {
+                        injectGoogleAnalytics(item.code.trim());
+                    }
+                });
+            } catch (error) {
+                console.error("Configuration system status: Ready. Waiting for active rows.");
+            }
+        }
+
+        function injectGoogleAnalytics(trackingId) {
+            window.ga_loaded = true;
+            const script1 = document.createElement('script');
+            script1.src = `https://www.googletagmanager.com/gtag/js?id=${trackingId}`;
+            script1.async = true;
+            document.head.appendChild(script1);
+
+            const script2 = document.createElement('script');
+            script2.innerHTML = `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${trackingId}');
+            `;
+            document.head.appendChild(script2);
+        }
+
+        // Live Crypto Engine
+        async function fetchCrypto() {
+            try {
+                const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,cardano&vs_currencies=usd&include_24hr_change=true');
+                const data = await res.json();
+                const container = document.getElementById('crypto-container');
+                container.innerHTML = '';
+                const coins = [{ id: 'bitcoin', name: 'Bitcoin', symbol: 'BTC' }, { id: 'ethereum', name: 'Ethereum', symbol: 'ETH' }, { id: 'solana', name: 'Solana', symbol: 'SOL' }, { id: 'cardano', name: 'Cardano', symbol: 'ADA' }];
+                coins.forEach(coin => {
+                    const price = data[coin.id].usd.toLocaleString();
+                    const change = data[coin.id].usd_24h_change.toFixed(2);
+                    container.innerHTML += `
+                        <div class="flex justify-between items-center bg-slate-900/30 p-4 rounded-2xl border border-slate-900/60 hover:bg-slate-900/50 transition duration-300">
+                            <div>
+                                <div class="font-bold text-slate-200 text-sm">${coin.name}</div>
+                                <div class="text-xs text-slate-500 font-medium">${coin.symbol}</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-extrabold text-slate-100 text-base font-mono">$${price}</div>
+                                <span class="text-xs font-semibold ${change >= 0 ? 'text-emerald-400' : 'text-rose-500'}">${change >= 0 ? '▲ +' : '▼ '}${change}%</span>
+                            </div>
+                        </div>`;
+                });
+                document.getElementById('crypto-loading').classList.add('hidden'); 
+                container.classList.remove('hidden');
+            } catch (err) { document.getElementById('crypto-loading').innerText = "Market data sync offline."; }
+        }
+
+        // Live Currency Engine
+        async function fetchCurrency() {
+            try {
+                const res = await fetch('https://open.er-api.com/v6/latest/USD');
+                const data = await res.json();
+                const inrBase = data.rates.INR;
+                const container = document.getElementById('currency-container');
+                container.innerHTML = '';
+                const currencies = [{ code: 'USD', name: 'US Dollar', sym: '$' }, { code: 'EUR', name: 'Euro', sym: '€' }, { code: 'GBP', name: 'British Pound', sym: '£' }, { code: 'AED', name: 'UAE Dirham', sym: 'د.إ' }];
+                currencies.forEach(cur => {
+                    let rateInINR = cur.code === 'USD' ? inrBase : (inrBase / data.rates[cur.code]);
+                    container.innerHTML += `
+                        <div class="flex justify-between items-center bg-slate-900/30 p-4 rounded-2xl border border-slate-900/60 hover:bg-slate-900/50 transition duration-300">
+                            <div>
+                                <div class="font-bold text-slate-200 text-sm">${cur.name}</div>
+                                <div class="text-xs text-slate-500 font-medium">${cur.code}</div>
+                            </div>
+                                <div class="font-extrabold text-emerald-400 text-base font-mono">₹${rateInINR.toFixed(2)}</div>
+                        </div>`;
+                });
+                document.getElementById('currency-loading').classList.add('hidden'); 
+                container.classList.remove('hidden');
+            } catch (err) { document.getElementById('currency-loading').innerText = "Exchange data sync offline."; }
+        }
+
+        function refreshData() {
+            fetchCrypto(); fetchCurrency(); loadGoogleSheetConfig();
+        }
+
+        window.onload = () => {
+            fetchCrypto(); fetchCurrency(); loadGoogleSheetConfig();
+        };
+    </script>
+</body>
+</html>
